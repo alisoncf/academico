@@ -1,0 +1,20 @@
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th{
+    background-color: darkgrey;
+}
+.menusuperio{
+    
+}
+.botaomenu{
+    width: 120px;
+}
+.menusuperior{
+    margin-left: 5px;
+    margin-top: 10px;
+    background-color: antiquewhite;
+    width: 80%;
+}

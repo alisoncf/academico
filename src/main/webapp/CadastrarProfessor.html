@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastrar um  novo Professor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            $(window).on("load", function () {
+                $.get("listajax", function (responseJson) {
+                    var $select = $("#area");
+                    $select.find("option").remove();
+                    $.each(responseJson, function (index, area) {
+                        if (area.Id === $("#area_id")) {
+                            $("<option value=" + area.Id + " selected>").val(area.Id).text(area.nome).appendTo($select);
+                        } else {
+                            $("<option value=" + area.Id + ">").val(area.Id).text(area.nome).appendTo($select);
+                        };
+                    });
+
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h2>Cadastrar Professor</h2>
+
+        <form action="GravarProfessorServlet" method="post" >
+            <div id="divLoad">
+                <label for="area">Informe uma área</label><br>
+                <select id="area" name="area"></select>  
+            </div>
+            <label for="cpf">CPF</label><br>
+            <input type="text" id="cpf" name="cpf" required size="20" value="" ><br>
+            <label for="nome">Nome</label><br>
+            <input type="text" id="nome" name="nome" value="" required size="60" ><br>
+            <label for="email">Email</label><br>
+            <input type="text" id="email" name="email" value="" required size="60" ><br>
+            <label for="telefone">Telefone</label><br>
+            <input type="text" id="telefone" name="telefone" required size="20" value="" ><br>
+
+
+
+
+            <br><br>
+            <input type="submit" value="Gravar">
+            <input type="button" value="Cancelar" onclick="history.go(-1)" >
+        </form>
+    </body>
+</html>
