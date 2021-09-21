@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import model.Area;
  
-@WebServlet("/listajax")
-public class listajax extends HttpServlet {
+@WebServlet("/GetAreasAjax")
+public class GetAreasAjax extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +47,7 @@ public class listajax extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String area = request.getParameter("area");
-        String text = "Server replies: You selected category: " + area;
+        String text = "Você selecionou a seguinte área: " + area;
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(text);
