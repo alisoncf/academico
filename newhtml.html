@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alterar Registro</title>
+        <link href="css/estilo.css"rel="stylesheet">
+    </head>
+    <body>
+        <h1>Alterar Registro</h1>
+        <form method="post" action="GravarProfessorServlet">
+            <label>id: 30</label><br>
+            <div id="divLoad">
+                <label for="area">Informe uma área</label><br>
+                <select id="area" nome="area">
+                    <option value=5 selected >Biologia</option>
+                    <option value=3>Ciências</option>
+                    <option value=6>Filosofia I</option>
+                    <option value=4>Matemática</option>
+                </select>
+            </div>
+            <input  type="hidden" id="id" name="id" value="30" size="10" readonly ><br>
+            <input  type="hidden" id="id_area" name="id_area" value="5" size="10" readonly ><br>
+            <label for="nome">Nome</label><br>
+            <input type="text" id="nome" name="nome" value="jordana fernandes de castro" size="60" ><br>
+            <label for="email">Email</label><br>
+            <input type="text" id="email" name="email" value="jordana@gmail.com" size="60" ><br>
+            <label for="cpf">CPF</label><br>
+            <input type="text" id="cpf" name="cpf" value="05106772150" ><br><br>
+            <label for="telefone">Telefone</label><br>
+            <input type="text" id="telefone" name="telefone" value="628788700988" ><br><br>
+            <input type="submit" value="Enviar" >
+            <input type="submit" formaction="ListarProfessorsServlet" value="Cancelar">
+        </form>
+    </body>
+</html>

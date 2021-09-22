@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -69,6 +70,9 @@ public class GravarProfessorServlet extends HttpServlet {
         professor.setCpf(request.getParameter("cpf"));
         professor.setNome(request.getParameter("nome"));
         professor.setTelefone(request.getParameter("telefone"));
+        
+        
+        Map<String, String[]> map =  request.getParameterMap();
         int a = Integer.parseInt( request.getParameter("area"));
         area= areadao.getAreaById(a);
         professor.setArea(area);

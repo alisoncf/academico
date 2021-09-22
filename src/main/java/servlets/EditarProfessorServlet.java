@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -31,6 +33,25 @@ public class EditarProfessorServlet extends HttpServlet {
 
     private Professor professor;
 
+    
+    private String getOptionArea(String area_atual){
+        List<Area> listaArea = new AreaDAO().ListaAreas("");
+        String retorno="<select id=\"area\" name=\"area\">\n";
+        for (Iterator<Area> iterator = listaArea.iterator(); iterator.hasNext();) {
+            Area next = iterator.next();
+            retorno+="<option value=" + next.getId();
+            
+            if(area_atual.equals(Integer.toString(next.getId()))){
+                retorno+=" selected ";
+            }
+            retorno+=">";
+            retorno+= next.getNome();
+            retorno += "</option>\n";
+        }
+        retorno+="</select>";
+        return retorno;
+    
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,24 +69,7 @@ public class EditarProfessorServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<script src=\"http://code.jquery.com/jquery-latest.min.js\"></script>\n"
-                    + "        <script>\n"
-                    + "            $(window).on(\"load\", function () {\n"
-                    + "                $.get(\"listajax\", function (responseJson) {\n"
-                    + "                    var $select = $(\"#area\");\n"
-                    + "                    alert($(\"#id_area.value\"));                              "
-                    + "                    $select.find(\"option\").remove();\n"
-                    + "                    $.each(responseJson, function (index, area) {\n"
-                    + "                       if (area.Id === $(\"#id_area\")) {\n"
-                    + "                            $(\"<option value=\" + area.Id + \" selected>\").val(area.Id).text(area.nome).appendTo($select);\n"
-                    + "                        }else{\n"
-                    + "                            $(\"<option value=\" + area.Id + \">\").val(area.Id).text(area.nome).appendTo($select);\n" 
-                    +       "                        }"
-                    + "                    });\n"
-                             
-                    + "                });"
-                    + "            });"
-                    + "        </script>");
+            
             out.println("<title>Alterar Registro</title>");
             out.println("<link href=\"css/estilo.css\"rel=\"stylesheet\">");
             out.println("</head>");
@@ -75,7 +79,7 @@ public class EditarProfessorServlet extends HttpServlet {
             out.println("<label>id: " + professor.getId() + "</label><br>");
             out.println("<div id=\"divLoad\">\n"
                     + "                <label for=\"area\">Informe uma área</label><br>\n"
-                    + "                <select id=\"area\" name=\"area\"></select>  \n"
+                    + getOptionArea(Integer.toString(professor.getArea().getId()))   + "\n"
                     + "            </div>");
             out.println("<input  type=\"hidden\" id=\"id\" name=\"id\""
                     + " value=\"" + professor.getId() + "\"" + " size=\"10\" readonly ><br>");
@@ -97,7 +101,7 @@ public class EditarProfessorServlet extends HttpServlet {
             out.println("<input type=\"submit\" value=\"Enviar\" >");
             out.println("<input type=\"submit\" formaction=\"ListarProfessorsServlet\" value=\"Cancelar\">");
             out.println("</form>");
-            out.println("</form>");
+           
 
             out.println("</body>");
             out.println("</html>");
